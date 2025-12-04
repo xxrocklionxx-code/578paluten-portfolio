@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- Diese beiden Zeilen werden jetzt dynamisch übersetzt -->
+  <title x-text="texts[lang].title">578paluten</title>
+  <meta name="description" x-text="texts[lang].description">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+
+  <style>
+    .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .gradient-text { 
+      background: linear-gradient(to right, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-all duration-500"
+      x-data="portfolio()"
+      x-init="init()">
+
+  <!-- Floating Switches -->
+  <div class="fixed top-6 right-6 z-50 flex gap-4">
+    <button @click="lang = lang === 'de' ? 'en' : 'de'"
+            class="px-5 py-3 bg-white dark:bg-gray-800 rounded-full shadow-2xl hover:shadow-purple-500/50 transition font-bold text-lg border-2 border-transparent hover:border-purple-500">
+      <span x-show="lang === 'de'">EN</span>
+      <span x-show="lang === 'en'">DE</span>
+    </button>
+    <button @click="dark = !dark; localStorage.theme = dark ? 'dark' : 'light'; 
+                    document.documentElement.classList.toggle('dark', dark)"
+            class="p-4 bg-white dark:bg-gray-800 rounded-full shadow-2xl hover:shadow-purple-500/50 transition text-2xl">
+      <span x-show="!dark">Dark Mode</span>
+      <span x-show="dark">Light Mode</span>
+    </button>
+  </div>
+
+  <!-- Hero -->
+  <section class="min-h-screen flex items-center justify-center gradient-bg relative overflow-hidden">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto" data-aos="fade-up">
+      <h1 class="text-6xl md:text-8xl font-black mb-6 gradient-text tracking-tight">578paluten</h1>
+      <p class="text-3xl md:text-5xl font-bold text-white mb-8 leading-tight" x-text="texts[lang].heroSubtitle"></p>
+      <p class="text-xl md:text-2xl text-gray-200 mb-12" x-text="texts[lang].heroSubline"></p>
+      <div class="mt-12">
+        <a href="#roles" class="inline-block px-12 py-5 bg-white text-purple-600 font-bold text-xl rounded-full hover:bg-gray-100 transform hover:scale-110 transition shadow-2xl">
+          <span x-text="texts[lang].heroButton"></span>
+        </a>
+      </div>
+    </div>
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Roles -->
+  <section id="roles" class="py-24 px-6 bg-white dark:bg-gray-800">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-5xl md:text-7xl font-black text-center mb-20 gradient-text" data-aos="fade-up" x-text="texts[lang].rolesTitle"></h2>
+      <div class="grid md:grid-cols-2 gap-12">
+        <div class="bg-gradient-to-br from-purple-500 to-pink-500 p-10 rounded-3xl text-white shadow-2xl hover:shadow-purple-500/50 transform hover:scale-105 transition duration-500" data-aos="fade-right">
+          <h3 class="text-4xl font-bold mb-4">COO</h3>
+          <p class="text-5xl font-black mb-6">Chief Complaining Officer</p>
+          <p class="text-lg leading-relaxed opacity-95" x-text="texts[lang].coo"></p>
+        </div>
+        <div class="bg-gradient-to-br from-blue-500 to-teal-500 p-10 rounded-3xl text-white shadow-2xl hover:shadow-blue-500/50 transform hover:scale-105 transition duration-500" data-aos="fade-left">
+          <h3 class="text-4xl font-bold mb-4">BDT</h3>
+          <p class="text-5xl font-black mb-6">Business Development Team</p>
+          <p class="text-lg leading-relaxed opacity-95" x-text="texts[lang].bdt"></p>
+        </div>
+        <div class="bg-gradient-to-br from-green-500 to-emerald-500 p-10 rounded-3xl text-white shadow-2xl hover:shadow-green-500/50 transform hover:scale-105 transition duration-500" data-aos="fade-right">
+          <h3 class="text-4xl font-bold mb-4">CAS</h3>
+          <p class="text-5xl font-black mb-6">Client Acquisition Specialist</p>
+          <p class="text-lg leading-relaxed opacity-95" x-text="texts[lang].cas"></p>
+        </div>
+        <div class="bg-gradient-to-br from-red-500 to-rose-500 p-10 rounded-3xl text-white shadow-2xl hover:shadow-red-500/50 transform hover:scale-105 transition duration-500" data-aos="fade-left">
+          <h3 class="text-4xl font-bold mb-4">C&I</h3>
+          <p class="text-4xl font-black mb-6">Complaining & Investigation</p>
+          <p class="text-lg leading-relaxed opacity-95" x-text="texts[lang].ci"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I Do -->
+  <section class="py-28 px-6 bg-gray-100 dark:bg-gray-900">
+    <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+      <h2 class="text-5xl md:text-7xl font-black mb-16 gradient-text" x-text="texts[lang].whatIDoTitle"></h2>
+      <p class="text-2xl md:text-3xl leading-relaxed mb-10" x-text="texts[lang].whatIDo1"></p>
+      <p class="text-2xl md:text-3xl leading-relaxed mb-16" x-text="texts[lang].whatIDo2"></p>
+      <p class="text-4xl md:text-6xl font-black gradient-text leading-tight">
+        <span x-text="texts[lang].short"></span><br>
+        578paluten – <span x-text="texts[lang].catchphrase"></span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-20 text-center bg-gray-900 text-white">
+    <p class="text-3xl md:text-4xl font-bold" x-text="texts[lang].footerWelcome"></p>
+    <p class="mt-6 text-xl opacity-90" x-text="texts[lang].footerJoke"></p>
+    <p class="mt-12 text-sm opacity-60" x-text="texts[lang].copyright"></p>
+  </footer>
+
+  <script>
+    function portfolio() {
+      return {
+        dark: false,
+        lang: 'de',
+
+        texts: {
+          de: {
+            title: "578paluten – Der Typ, der Devs findet, bevor andere wissen, dass sie welche brauchen",
+            description: "COO • BDT • CAS • C&I – Multi-Role Specialist bei Nourity",
+            heroSubtitle: "Der Typ, der Devs findet,<br>bevor andere wissen, dass sie welche brauchen.",
+            heroSubline: "Multi-Role Specialist @ Nourity",
+            heroButton: "Runterscrollen und staunen",
+            rolesTitle: "Meine offiziellen Chaos-Titel",
+            coo: "Die wichtigste Position, die keiner versteht, aber jeder braucht.<br>Ich höre Probleme, analysiere sie – und mache sie sofort lösbar.",
+            bdt: "Ich strukturiere Programme, optimiere Abläufe und sorge dafür,<br>dass Teams effizient funktionieren – wie ein Schweizer Uhrwerk, nur mit mehr Memes.",
+            cas: "Ich finde genau die Menschen, die unsere Projekte brauchen –<br>manchmal bevor sie selbst es wissen.",
+            ci: "Wenn etwas nicht läuft? Ich finde raus warum,<br>dokumentiere es und sorge dafür, dass es nie wieder passiert.",
+            whatIDoTitle: "Was ich eigentlich mache",
+            whatIDo1: "Ich bin der Typ, der die richtigen Developer für die richtigen Projekte findet – auch wenn die Anforderungen kompliziert, chaotisch oder plötzlich sind.",
+            whatIDo2: "Ich verbinde Menschen. Ich stärke Teams. Ich löse Probleme. Ich bringe Projekte ins Rollen.",
+            short: "Kurz gesagt:",
+            catchphrase: "Der Dev-Finder aus der Hölle (und zurück)",
+            footerWelcome: "Willkommen in meinem Portfolio.",
+            footerJoke: "Du weißt, wo du mich findest – falls nicht, beschwer dich bei meinem CEO/EL ;)",
+            copyright: "© 2025 578paluten – Alle Rechte vorbehalten. Außer bei Beschwerden, die gehören mir sowieso."
+          },
+          en: {
+            title: "578paluten – The guy who finds devs before others even know they need them",
+            description: "COO • BDT • CAS • C&I – Multi-Role Specialist at Nourity",
+            heroSubtitle: "The guy who finds devs<br>before others even know they need them.",
+            heroSubline: "Multi-Role Specialist @ Nourity",
+            heroButton: "Scroll down and be amazed",
+            rolesTitle: "My official chaos titles",
+            coo: "The most important role nobody understands but everybody needs.<br>I listen to problems, analyze them – and make them solvable instantly.",
+            bdt: "I structure programs, optimize workflows and make teams run efficiently –<br>like a Swiss watch, just with more memes.",
+            cas: "I find exactly the people who need our projects –<br>sometimes before they know it themselves.",
+            ci: "When something doesn't work? I find out why,<br>document it and make sure it never happens again.",
+            whatIDoTitle: "What I actually do",
+            whatIDo1: "I'm the guy who finds the right developers for the right projects – even when requirements are complicated, chaotic or sudden.",
+            whatIDo2: "I connect people. I strengthen teams. I solve problems. I get projects rolling.",
+            short: "In short:",
+            catchphrase: "The dev finder from hell (and back)",
+            footerWelcome: "Welcome to my portfolio.",
+            footerJoke: "You know where to find me – if not, complain to my CEO/EL ;)",
+            copyright: "© 2025 578paluten – All rights reserved. Except complaints, those are mine anyway."
+          }
+        },
+
+        init() {
+          // Darkmode
+          if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            this.dark = true;
+            document.documentElement.classList.add('dark');
+          }
+          AOS.init({ duration: 800, once: true });
+        }
+      }
+    }
+  </script>
+</body>
+</html>
